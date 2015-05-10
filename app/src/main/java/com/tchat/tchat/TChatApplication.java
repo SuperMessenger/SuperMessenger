@@ -4,12 +4,13 @@ import android.app.Application;
 
 import org.drinkless.td.libcore.telegram.Client;
 import org.drinkless.td.libcore.telegram.TG;
-import org.drinkless.td.libcore.telegram.TdApi;
 
 /**
  * Created by dmitriy on 10.05.15.
  */
 public class TChatApplication extends Application {
+
+    private static final String TAG = "TChatApplication";
 
     private static Client client = null;
 
@@ -19,12 +20,6 @@ public class TChatApplication extends Application {
         TG.setDir(getFilesDir().toString());
         TG.setUpdatesHandler(new TChatUpdateHandler());
         client = TG.getClientInstance();
-        client.send(new TdApi.AuthReset(), new Client.ResultHandler() {
-            @Override
-            public void onResult(TdApi.TLObject object) {
-
-            }
-        });
     }
 
     public static Client getTelegramClient() {
